@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sharkcode | Link in Bio</title>
+    <!-- Fuente Moderna Sans-serif -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #070a13;
+            /* Fondo base oscuro */
+            --accent-aqua: #061b01;
+            /* Verde neón vibrante */
+            --accent-ocean: #4ffe5b;
+            /* Azul secundario para gradientes */
+            --text-main: #ffffff;
+            --text-muted: #485a72;
+            --card-bg: rgba(81, 89, 109, 0.55);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --card-hover: rgba(140, 150, 170, 0.8);
+            /* Fondo más claro en hover */
+            --glow-color: rgba(35, 217, 15, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- FONDO ANIMADO Y EFECTO BLUR --- */
+        .bg-layer {
+            position: fixed;
+            top: -5%;
+            left: -5%;
+            width: 110%;
+            height: 110%;
+            z-index: -2;
+            background-image: url('Imagenes/sharkcode.png');
+            background-size: cover;
+            background-position: center;
+            filter: blur(0px);
+            /* Sin desenfoque para claridad total */
+            transition: transform 0.1s ease-out;
+            animation: breathe 6s infinite alternate ease-in-out;
+            /* Movimiento mucho más rápido */
+        }
+
+        /* Opcional: una tenue animación de respiración automática para celular */
+        @keyframes breathe {
+            0% {
+                transform: scale(1.02);
+            }
+
+            100% {
+                transform: scale(1.08);
+            }
+        }
+
+        .bg-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            /* Overlay hiper sutil para máxima claridad de la imagen de fondo */
+            background: linear-gradient(145deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%);
+        }
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .container {
+            width: 100%;
+            max-width: 480px;
+            padding: 40px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+            animation: fadeIn 1.2s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- SECCIÓN PERFIL --- */
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .profile-img-box {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            padding: 4px;
+            /* Espacio para el borde brillante */
+            background: linear-gradient(135deg, var(--accent-aqua), var(--accent-ocean));
+            margin-bottom: 20px;
+            box-shadow: 0 0 25px var(--glow-color);
+            animation: pulseProfile 3s infinite alternate;
+            position: relative;
+        }
+
+        @keyframes pulseProfile {
+            0% {
+                box-shadow: 0 0 15px var(--glow-color);
+            }
+
+            100% {
+                box-shadow: 0 0 35px var(--accent-aqua);
+            }
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--bg-dark);
+            /* Corte visual oscuro interior */
+        }
+
+        .profile-name {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+            color: #fffffff2;
+            text-shadow: 0 0 8px var(--glow-color), 0 0 15px var(--accent-aqua);
+            animation: textGlow 2.5s infinite alternate;
+        }
+
+        @keyframes textGlow {
+            0% {
+                text-shadow: 0 0 8px rgba(1, 10, 3, 0.4);
+            }
+
+            100% {
+                text-shadow: 0 0 16px rgba(0, 254, 102, 0.523), 0 0 25px rgba(144, 195, 240, 0.6);
+            }
+        }
+
+        .profile-desc {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* --- ENLACES / BOTONES --- */
+        .links-group {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 16px 20px;
+            border-radius: 20px;
+            /* Bordes bien redondeados */
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 1.1rem;
+            letter-spacing: 0.3px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(8px);
+            overflow: hidden;
+
+            /* Animación inicial escondida hasta que cargue por JS */
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        /* Hover effect en botón */
+        .link-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            background: var(--card-hover);
+            border-color: var(--accent-aqua);
+            box-shadow: 0 10px 25px rgba(216, 205, 205, 0.511), inset 0 0 15px rgba(41, 236, 116, 0.2);
+            color: var(--accent-aqua);
+        }
+
+        /* Destello que pasa a través del botón al hacer hover */
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.489), transparent);
+            transform: skewX(-25deg);
+            transition: all 0.6s ease;
+        }
+
+        .link-card:hover::before {
+            left: 150%;
+        }
+
+        .icon-box {
+            position: absolute;
+            left: 24px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-box svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--text-main);
+            transition: fill 0.4s ease;
+        }
+
+        .link-card:hover .icon-box svg {
+            fill: var(--accent-aqua);
+        }
+
+        .link-text {
+            text-align: center;
+            flex-grow: 1;
+            z-index: 2;
+            /* Sobre el destello hover */
+        }
+
+        /* Animación para que las tarjetas lleguen escalonadamente */
+        .link-card.show {
+            animation: slideInCards 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes slideInCards {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- FOOTER --- */
+        .footer {
+            margin-top: 45px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Fondos -->
+    <div class="bg-layer" id="bgLayer"></div>
+    <div class="bg-overlay"></div>
+
+    <div class="container">
+        <!-- Cabecera y Perfil -->
+        <div class="profile">
+            <div class="profile-img-box">
+                <img src="Imagenes/Tiburon.jpeg" alt="Sharkode Perfil" class="profile-img">
+            </div>
+            <h1 class="profile-name">Sharkcode</h1>
+            <p class="profile-desc">Contenido, tecnología y estilo 🦈</p>
+        </div>
+
+        <!-- Grupo de Botones -->
+        <div class="links-group" id="linksGroup">
+            <!-- Los botones se generarán por JavaScript para manejar el orden y retrasos -->
+        </div>
+
+        <div class="footer">
+            &copy; 2026 Sharkode
+        </div>
+    </div>
+
+    <!-- Script de datos y animaciones -->
+    <script>
+        // Datos de enlaces (Puedes agregar más o cambiar urls)
+        const linksData = [
+            {
+                name: "Instagram",
+                url: "https://www.instagram.com/sharkcoder/",
+                icon: `<svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>`
+            },
+            {
+                name: "TikTok",
+                url: "https://www.tiktok.com/@plazanews2025?_r=1&_t=ZS-94tLju2R3Om",
+                icon: `<svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.06-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.9-.32-1.98-.23-2.81.33-.85.51-1.44 1.43-1.58 2.41-.1.74.03 1.52.41 2.16.4.67 1.09 1.14 1.83 1.34.8.21 1.67.12 2.4-.23.63-.3.11-1 .11-1 -.01-3.69-.01-7.39-.01-11.09z"/></svg>`
+            },
+            {
+                name: "YouTube",
+                url: "https://youtube.com",
+                icon: `<svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>`
+            },
+            {
+                name: "WhatsApp",
+                url: "https://wa.me/+526634176751",
+                icon: `<svg viewBox="0 0 24 24"><path d="M11.996 0A12.007 12.007 0 0 0 0 12.004c0 2.13.56 4.194 1.614 6L.34 22.824l4.945-1.298A11.942 11.942 0 0 0 12 24.01c6.626 0 12.005-5.385 12.005-12.01A12.007 12.007 0 0 0 11.996 0zm0 22.005c-1.803 0-3.568-.485-5.118-1.403l-.367-.218-3.8.997 1.015-3.705-.24-.38A9.998 9.998 0 0 1 1.996 12A10.01 10.01 0 0 1 12 2.001c5.514 0 10.005 4.49 10.005 10.001A10.01 10.01 0 0 1 12 22.005zM17.493 14.5c-.302-.15-1.782-.876-2.058-.977-.275-.101-.476-.15-.677.15-.2.302-.777.977-.951 1.178-.175.2-.351.226-.653.076-1.554-.77-2.673-1.639-3.66-3.32-.204-.347.202-.322.645-.989.15-.224.075-.425 0-.575-.075-.15-.676-1.625-.925-2.224-.242-.581-.488-.503-.676-.512-.175-.008-.376-.008-.576-.008s-.527.075-.802.375c-.276.3-.984 1.025-.984 2.502 0 1.476 1.009 2.903 1.15 3.103.14.2 2.122 3.238 5.143 4.542.719.31 1.28.496 1.717.635.723.23 1.383.197 1.902.12.58-.086 1.782-.727 2.033-1.428.251-.701.251-1.3.176-1.428-.075-.125-.276-.2-.577-.35z"/></svg>`
+            },
+            {
+                name: "Web Oficial",
+                url: "https://codediego.com",
+                icon: `<svg viewBox="0 0 24 24"><path d="M12 0a12 12 0 1 0 12 12A12.013 12.013 0 0 0 12 0zm0 22a9.96 9.96 0 0 1-5.6-1.72c.6-1.03 2.51-1.57 5.6-1.57s5 1.54 5.6 2.57A9.96 9.96 0 0 1 12 22zm6.92-2.91c-.81-1.34-3.14-2.39-6.92-2.39s-6.11 1.05-6.92 2.39A9.982 9.982 0 1 1 12 2c2.25 0 4.33.75 6 2.01V4.01A9.957 9.957 0 0 1 20 8.54v2.96c0 2.25-.75 4.33-2.01 6v-.01zM12 4.49a4.5 4.5 0 1 0 4.5 4.5 4.505 4.505 0 0 0-4.5-4.5zm0 7a2.5 2.5 0 1 1 2.5-2.5 2.503 2.503 0 0 1-2.5 2.5z"/></svg>`
+            }
+        ];
+
+        const linksGroup = document.getElementById('linksGroup');
+
+        // Generar botones dinámicamente
+        linksData.forEach((link, i) => {
+            const card = document.createElement('a');
+            card.className = "link-card";
+            card.href = link.url;
+            card.target = "_blank";
+            // Retraso escalonado para la animación de entrada
+            card.style.animationDelay = `${(i * 0.12) + 0.4}s`;
+
+            card.innerHTML = `
+                <div class="icon-box">${link.icon}</div>
+                <div class="link-text">${link.name}</div>
+            `;
+
+            linksGroup.appendChild(card);
+
+            // Clase que dispara la animación (usando timeout para el render flow)
+            setTimeout(() => {
+                card.classList.add('show');
+            }, 10);
+        });
+
+        // Efecto Parallax Ligero con el mouse (para Desktop)
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth / 2 - e.pageX) / 15; /* Sensibilidad aumentada */
+            const y = (window.innerHeight / 2 - e.pageY) / 15; /* Sensibilidad aumentada */
+            const bgLayer = document.getElementById('bgLayer');
+
+            // Limitamos a pantallas no táctiles / anchas
+            if (window.innerWidth > 768) {
+                bgLayer.style.transform = `scale(1.1) translate(${x}px, ${y}px)`;
+            }
+        });
+
+    </script>
+</body>
+
+</html>
